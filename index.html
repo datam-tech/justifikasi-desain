@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Penomoran Justifikasi Desain — Divisi Technology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #f4f6f9;
+      --bg-card: #ffffff;
+      --navy: #1e3a5f;
+      --navy-hover: #162c49;
+      --accent: #2b6cb0;
+      --accent-soft: #ebf4ff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      padding: 20px;
+    }
+    .container { max-width: 1220px; margin: 0 auto; }
+
+    /* Header */
+    .header {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    .header h1 { font-size: 1.2rem; font-weight: 700; color: var(--navy); }
+    .header p { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+    .btn {
+      padding: 9px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .btn:hover { background: #f8fafc; }
+    .btn-primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .btn-primary:hover { background: var(--navy-hover); }
+    .btn-sm { padding: 5px 10px; font-size: 0.75rem; border-radius: 8px; }
+
+    /* Filter Bar */
+    .filter-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+    .input-ctrl {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      outline: none;
+      background: #fff;
+    }
+    .input-ctrl:focus { border-color: var(--accent); }
+    .search-input { flex: 1; min-width: 220px; }
+
+    /* Table */
+    .table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      overflow-x: auto;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    th {
+      background: var(--navy);
+      color: #fff;
+      font-weight: 600;
+      text-align: left;
+      padding: 12px 14px;
+      white-space: nowrap;
+    }
+    td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tr:hover td { background: #f8fafc; }
+
+    .doc-code {
+      font-family: 'Courier New', monospace;
+      font-weight: 700;
+      font-size: 0.84rem;
+      color: var(--navy);
+      background: var(--accent-soft);
+      padding: 4px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .rev-badge {
+      background: #fef3c7;
+      color: #92400e;
+      font-weight: 700;
+      font-size: 0.74rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-block;
+      border: 1px solid #fde68a;
+    }
+    .rev-badge.rev-zero { background: #e2e8f0; color: #334155; border-color: #cbd5e1; }
+    .link-vault { color: var(--accent); font-weight: 600; text-decoration: none; }
+    .link-vault:hover { text-decoration: underline; }
+    .actions { display: flex; gap: 6px; white-space: nowrap; }
+
+    /* Modal */
+    .modal-bg {
+      display: none; position: fixed; inset: 0;
+      background: rgba(15, 23, 42, 0.48); backdrop-filter: blur(2px);
+      justify-content: center; align-items: center; z-index: 100; padding: 16px;
+    }
+    .modal-card {
+      background: #fff; border-radius: 16px; padding: 24px;
+      width: 100%; max-width: 500px; box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-card h2 { font-size: 1.05rem; color: var(--navy); margin-bottom: 14px; }
+    .form-group { margin-bottom: 12px; position: relative; }
+    .form-group label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; }
+    .form-group input, .form-group select {
+      width: 100%; padding: 9px 12px; border: 1px solid var(--border);
+      border-radius: 9px; font-family: inherit; font-size: 0.84rem;
+    }
+
+    /* Searchable Dropdown */
+    .dropdown-list {
+      display: none; position: absolute; left: 0; right: 0; top: 100%;
+      background: #fff; border: 1px solid var(--border); border-radius: 10px;
+      max-height: 210px; overflow-y: auto; z-index: 120;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12); margin-top: 4px;
+    }
+    .dropdown-item { padding: 9px 12px; cursor: pointer; border-bottom: 1px solid #f1f5f9; }
+    .dropdown-item:hover { background: var(--accent-soft); }
+    .dropdown-item strong { display: block; font-size: 0.82rem; color: var(--text-main); }
+    .dropdown-item span { font-size: 0.73rem; color: var(--text-muted); }
+
+    /* Live Preview Box */
+    .preview-box {
+      background: var(--accent-soft); border: 1px dashed var(--accent);
+      border-radius: 10px; padding: 12px; text-align: center; margin-bottom: 14px;
+    }
+    .preview-box small { display: block; font-size: 0.72rem; color: var(--text-muted); margin-bottom: 3px; }
+    .preview-box strong { font-family: 'Courier New', monospace; font-size: 1rem; color: var(--navy); }
+
+    /* History List */
+    .hist-item {
+      border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px;
+      margin-bottom: 8px; display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+    }
+    .hist-item.latest { border-color: var(--accent); background: var(--accent-soft); }
+
+    .modal-footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+    .status-msg { text-align: center; padding: 36px; color: var(--text-muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div>
+        <h1>Penomoran Justifikasi Desain — Divisi Technology</h1>
+        <p>Format: WWW-JTF-X-YYYYYYYYYY-ZZ • Running Number Otomatis Per Proyek</p>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn" onclick="loadAllData()">🔄 Refresh</button>
+        <button class="btn btn-primary" onclick="openRegisterModal()">+ Register Nomor Baru</button>
+      </div>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-bar">
+      <input type="text" id="searchInput" class="input-ctrl search-input" placeholder="Cari nomor dokumen, nama dokumen, proyek, atau PIC..." oninput="renderTable()" />
+      <select id="projectFilter" class="input-ctrl" onchange="renderTable()">
+        <option value="">Semua Proyek</option>
+      </select>
+    </div>
+
+    <!-- Table -->
+    <div class="table-card">
+      <div id="loadingBox" class="status-msg">Memuat data dari Google Sheets...</div>
+      <table id="mainTable" style="display:none;">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Tanggal</th>
+            <th>Proyek</th>
+            <th>Nomor Justifikasi Desain</th>
+            <th>Revisi</th>
+            <th>Nama Dokumen</th>
+            <th>PIC</th>
+            <th>Link Vault</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal 1: Register Nomor Baru -->
+  <div class="modal-bg" id="registerModal">
+    <div class="modal-card">
+      <h2>Register Nomor Justifikasi Desain Baru</h2>
+      <div class="preview-box">
+        <small>Pratinjau Format Nomor (WWW otomatis per proyek saat disimpan)</small>
+        <strong id="livePreview">WWW-JTF-1-YYYYYYYYYY-ZZ</strong>
+      </div>
+
+      <div class="form-group">
+        <label>Pilih Proyek (Ketik untuk mencari)</label>
+        <input type="text" id="projSearchInput" placeholder="Ketik nama proyek atau kode finish product..." autocomplete="off" onfocus="showProjectDropdown()" oninput="filterProjects()" />
+        <div class="dropdown-list" id="projDropdownList"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Kode Unit (X)</label>
+        <select id="unitSelect" onchange="updatePreview()">
+          <option value="1">1 — Desain Carbody dan Bogie</option>
+          <option value="2">2 — Desain Mekanik, Interior, dan Eksterior</option>
+          <option value="3">3 — Desain Electrical System and Control</option>
+          <option value="4">4 — Desain Integrasi dan Quality</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Tanggal Pembuatan (Dokumentasi)</label>
+        <input type="date" id="regTanggal" />
+      </div>
+
+      <div class="form-group">
+        <label>Nama / Judul Dokumen Justifikasi</label>
+        <input type="text" id="regJudul" placeholder="Contoh: Justifikasi Desain Struktur Underframe" />
+      </div>
+
+      <div class="form-group">
+        <label>PIC</label>
+        <input type="text" id="regPic" placeholder="Nama PIC penyusun dokumen" />
+      </div>
+
+      <div class="form-group">
+        <label>Link Vault (Opsional — bisa diisi nanti)</label>
+        <input type="url" id="regLink" placeholder="https://..." />
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn" onclick="closeModal('registerModal')">Batal</button>
+        <button class="btn btn-primary" id="btnSubmitReg" onclick="submitRegister()">Generate & Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Update Revisi -->
+  <div class="modal-bg" id="reviseModal">
+    <div class="modal-card">
+      <h2>Update Revisi Dokumen</h2>
+      <div class="preview-box">
+        <small>Nomor Dokumen Tetap • Naik ke <strong id="revNextLabel">Revisi A</strong></small>
+        <strong id="revDocNumber">-</strong>
+      </div>
+      <input type="hidden" id="revRow" />
+      <div class="form-group">
+        <label>Tanggal Revisi</label>
+        <input type="date" id="revTanggal" />
+      </div>
+      <div class="form-group">
+        <label>Nama / Judul Dokumen</label>
+        <input type="text" id="revJudul" />
+      </div>
+      <div class="form-group">
+        <label>PIC</label>
+        <input type="text" id="revPic" />
+      </div>
+      <div class="form-group">
+        <label>Link Vault Terbaru (Opsional)</label>
+        <input type="url" id="revLink" placeholder="https://..." />
+      </div>
+      <div class="modal-footer">
+        <button class="btn" onclick="closeModal('reviseModal')">Batal</button>
+        <button class="btn btn-primary" id="btnSubmitRev" onclick="submitRevise()">Simpan Revisi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Histori Revisi -->
+  <div class="modal-bg" id="historyModal" onclick="if(event.target===this) closeModal('historyModal')">
+    <div class="modal-card">
+      <h2>Riwayat Revisi Dokumen</h2>
+      <p id="histDocTitle" style="font-size:0.82rem; font-weight:700; color:var(--navy); margin-bottom:12px;"></p>
+      <div id="historyList"></div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="closeModal('historyModal')">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Edit Link Vault -->
+  <div class="modal-bg" id="linkModal">
+    <div class="modal-card">
+      <h2>Update Link Vault</h2>
+      <p id="linkDocLabel" style="font-size:0.82rem; font-weight:700; color:var(--navy); margin-bottom:12px;"></p>
+      <input type="hidden" id="linkRow" />
+      <div class="form-group">
+        <label>URL / Link Vault</label>
+        <input type="url" id="linkInput" placeholder="https://..." />
+      </div>
+      <div class="modal-footer">
+        <button class="btn" onclick="closeModal('linkModal')">Batal</button>
+        <button class="btn btn-primary" id="btnSubmitLink" onclick="submitLink()">Simpan Link</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw7shTbQvmIibIplUeFtapRF5qLAyd_Nr-kHVSZy_jJHJN1Otxbuh9X2nBOWFZ0dMSIXg/exec";
+    let projectsData = [];
+    let recordsData = [];
+    let selectedProject = null;
+
+    function getTodayISO() {
+      return new Date().toISOString().split("T")[0];
+    }
+
+    async function loadAllData() {
+      document.getElementById("loadingBox").style.display = "block";
+      document.getElementById("mainTable").style.display = "none";
+      try {
+        const res = await fetch(WEB_APP_URL);
+        const data = await res.json();
+        if (data.status !== "success") throw new Error(data.message);
+
+        projectsData = data.projects || [];
+        recordsData = data.records || [];
+
+        const filterSel = document.getElementById("projectFilter");
+        const currentFilter = filterSel.value;
+        filterSel.innerHTML = `<option value="">Semua Proyek</option>` +
+          projectsData.map(p => `<option value="${p.nama}">${p.nama}</option>`).join("");
+        filterSel.value = currentFilter;
+
+        document.getElementById("loadingBox").style.display = "none";
+        document.getElementById("mainTable").style.display = "table";
+        renderTable();
+      } catch (err) {
+        document.getElementById("loadingBox").innerText = "Gagal memuat data: " + err.message;
+      }
+    }
+
+    function renderTable() {
+      const kw = document.getElementById("searchInput").value.toLowerCase();
+      const proj = document.getElementById("projectFilter").value;
+
+      const filtered = recordsData.filter(r => {
+        const matchProj = !proj || r.proyek === proj;
+        const matchKw = !kw ||
+          r.nomor.toLowerCase().includes(kw) ||
+          r.judul.toLowerCase().includes(kw) ||
+          r.proyek.toLowerCase().includes(kw) ||
+          r.pic.toLowerCase().includes(kw);
+        return matchProj && matchKw;
+      });
+
+      const tbody = document.getElementById("tableBody");
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:24px; color:#64748b;">Belum ada data dokumen yang cocok.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map((r, idx) => `
+        <tr>
+          <td>${idx + 1}</td>
+          <td style="white-space:nowrap;">${r.tanggal}</td>
+          <td>${r.proyek}</td>
+          <td><span class="doc-code" title="Klik untuk salin" onclick="copyText('${r.nomor}')">${r.nomor}</span></td>
+          <td>
+            <span class="rev-badge ${r.revisi === '0' ? 'rev-zero' : ''}" onclick='openHistoryModal(${JSON.stringify(r)})'>
+              Rev ${r.revisi} ▾
+            </span>
+          </td>
+          <td><strong>${r.judul}</strong></td>
+          <td>${r.pic}</td>
+          <td>
+            ${r.link ? `<a href="${r.link}" target="_blank" class="link-vault">Buka File ↗</a>` : `<span style="color:#94a3b8;">Belum ada</span>`}
+          </td>
+          <td>
+            <div class="actions">
+              <button class="btn btn-sm" onclick='openReviseModal(${JSON.stringify(r)})'>🔄 Revisi</button>
+              <button class="btn btn-sm" onclick='openLinkModal(${JSON.stringify(r)})'>🔗 Link</button>
+            </div>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    /* Searchable Dropdown Proyek */
+    function showProjectDropdown() {
+      filterProjects();
+      document.getElementById("projDropdownList").style.display = "block";
+    }
+
+    function filterProjects() {
+      const q = document.getElementById("projSearchInput").value.toLowerCase();
+      const list = document.getElementById("projDropdownList");
+      const matches = projectsData.filter(p =>
+        p.nama.toLowerCase().includes(q) || p.kode.toLowerCase().includes(q)
+      );
+
+      if (matches.length === 0) {
+        list.innerHTML = `<div class="dropdown-item"><span>Proyek tidak ditemukan</span></div>`;
+        return;
+      }
+
+      list.innerHTML = matches.map(p => `
+        <div class="dropdown-item" onclick='selectProject(${JSON.stringify(p)})'>
+          <strong>${p.nama}</strong>
+          <span>Finish Product: ${p.kode} • Tahun: ${p.tahunFull} (${p.tahun})</span>
+        </div>
+      `).join("");
+    }
+
+    function selectProject(p) {
+      selectedProject = p;
+      document.getElementById("projSearchInput").value = p.nama;
+      document.getElementById("projDropdownList").style.display = "none";
+      updatePreview();
+    }
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".form-group")) {
+        document.getElementById("projDropdownList").style.display = "none";
+      }
+    });
+
+    function updatePreview() {
+      const unit = document.getElementById("unitSelect").value;
+      const kode = selectedProject ? selectedProject.kode : "YYYYYYYYYY";
+      const tahun = selectedProject ? selectedProject.tahun : "ZZ";
+      document.getElementById("livePreview").innerText = `WWW-JTF-${unit}-${kode}-${tahun}`;
+    }
+
+    /* Register Baru */
+    function openRegisterModal() {
+      selectedProject = null;
+      document.getElementById("projSearchInput").value = "";
+      document.getElementById("regTanggal").value = getTodayISO();
+      document.getElementById("regJudul").value = "";
+      document.getElementById("regPic").value = "";
+      document.getElementById("regLink").value = "";
+      updatePreview();
+      document.getElementById("registerModal").style.display = "flex";
+    }
+
+    async function submitRegister() {
+      if (!selectedProject) return alert("Silakan pilih proyek dari daftar terlebih dahulu.");
+      const judul = document.getElementById("regJudul").value.trim();
+      const pic = document.getElementById("regPic").value.trim();
+      const tanggal = document.getElementById("regTanggal").value;
+      if (!judul || !pic || !tanggal) return alert("Tanggal, Nama Dokumen, dan PIC wajib diisi.");
+
+      const btn = document.getElementById("btnSubmitReg");
+      btn.disabled = true;
+      btn.innerText = "Menyimpan...";
+
+      try {
+        const res = await fetch(WEB_APP_URL, {
+          method: "POST",
+          body: JSON.stringify({
+            action: "register",
+            proyek: selectedProject.nama,
+            kodeUnit: document.getElementById("unitSelect").value,
+            kodeFinish: selectedProject.kode,
+            tahun: selectedProject.tahun,
+            tanggal,
+            judul,
+            pic,
+            link: document.getElementById("regLink").value.trim()
+          })
+        });
+        const json = await res.json();
+        if (json.status !== "success") throw new Error(json.message);
+
+        alert(json.message);
+        closeModal("registerModal");
+        loadAllData();
+      } catch (err) {
+        alert("Gagal menyimpan: " + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Generate & Simpan";
+      }
+    }
+
+    /* Revisi */
+    function getNextRevPreview(rev) {
+      if (!rev || rev === "0") return "A";
+      const u = rev.toUpperCase();
+      return (u.length === 1 && u >= "A" && u < "Z") ? String.fromCharCode(u.charCodeAt(0) + 1) : u + "1";
+    }
+
+    function openReviseModal(r) {
+      document.getElementById("revRow").value = r.row;
+      document.getElementById("revDocNumber").innerText = r.nomor;
+      document.getElementById("revNextLabel").innerText = "Revisi " + getNextRevPreview(r.revisi);
+      document.getElementById("revTanggal").value = getTodayISO();
+      document.getElementById("revJudul").value = r.judul;
+      document.getElementById("revPic").value = r.pic;
+      document.getElementById("revLink").value = r.link;
+      document.getElementById("reviseModal").style.display = "flex";
+    }
+
+    async function submitRevise() {
+      const btn = document.getElementById("btnSubmitRev");
+      btn.disabled = true;
+      btn.innerText = "Menyimpan...";
+      try {
+        const res = await fetch(WEB_APP_URL, {
+          method: "POST",
+          body: JSON.stringify({
+            action: "revise",
+            row: Number(document.getElementById("revRow").value),
+            tanggal: document.getElementById("revTanggal").value,
+            judul: document.getElementById("revJudul").value.trim(),
+            pic: document.getElementById("revPic").value.trim(),
+            link: document.getElementById("revLink").value.trim()
+          })
+        });
+        const json = await res.json();
+        if (json.status !== "success") throw new Error(json.message);
+
+        alert(json.message);
+        closeModal("reviseModal");
+        loadAllData();
+      } catch (err) {
+        alert("Gagal update revisi: " + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Simpan Revisi";
+      }
+    }
+
+    /* Histori Revisi */
+    function openHistoryModal(r) {
+      document.getElementById("histDocTitle").innerText = r.nomor + " (" + r.proyek + ")";
+      const list = r.history || [];
+      document.getElementById("historyList").innerHTML = list.map((h, i) => `
+        <div class="hist-item ${i === list.length - 1 ? 'latest' : ''}">
+          <div>
+            <strong style="font-size:0.82rem;">Revisi ${h.revisi}</strong>
+            <div style="font-size:0.8rem; margin-top:2px;">${h.judul}</div>
+          </div>
+          <span style="font-size:0.75rem; color:#64748b; white-space:nowrap;">${h.tanggal}</span>
+        </div>
+      `).join("");
+      document.getElementById("historyModal").style.display = "flex";
+    }
+
+    /* Edit Link Vault */
+    function openLinkModal(r) {
+      document.getElementById("linkRow").value = r.row;
+      document.getElementById("linkDocLabel").innerText = r.nomor + " — " + r.judul;
+      document.getElementById("linkInput").value = r.link || "";
+      document.getElementById("linkModal").style.display = "flex";
+    }
+
+    async function submitLink() {
+      const btn = document.getElementById("btnSubmitLink");
+      btn.disabled = true;
+      btn.innerText = "Menyimpan...";
+      try {
+        const res = await fetch(WEB_APP_URL, {
+          method: "POST",
+          body: JSON.stringify({
+            action: "updateLink",
+            row: Number(document.getElementById("linkRow").value),
+            link: document.getElementById("linkInput").value.trim()
+          })
+        });
+        const json = await res.json();
+        if (json.status !== "success") throw new Error(json.message);
+
+        closeModal("linkModal");
+        loadAllData();
+      } catch (err) {
+        alert("Gagal update link: " + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Simpan Link";
+      }
+    }
+
+    function copyText(txt) {
+      navigator.clipboard.writeText(txt);
+      alert("Nomor disalin: " + txt);
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    loadAllData();
+  </script>
+</body>
+</html>
