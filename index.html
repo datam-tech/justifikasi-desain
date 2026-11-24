@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Penomoran Justifikasi Desain — Divisi Technology</title>
+  <title>Monitoring Justifikasi Desain Divisi Technology</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -44,7 +44,6 @@
       margin-bottom: 18px;
     }
     .header h1 { font-size: 1.2rem; font-weight: 700; color: var(--navy); }
-    .header p { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
 
     .btn {
       padding: 9px 16px;
@@ -190,8 +189,7 @@
     <!-- Header -->
     <div class="header">
       <div>
-        <h1>Penomoran Justifikasi Desain — Divisi Technology</h1>
-        <p>Format: WWW-JTF-X-YYYYYYYYYY-ZZ • Running Number Otomatis Per Proyek</p>
+        <h1>Monitoring Justifikasi Desain Divisi Technology</h1>
       </div>
       <div style="display:flex; gap:8px;">
         <button class="btn" onclick="loadAllData()">🔄 Refresh</button>
@@ -234,8 +232,8 @@
     <div class="modal-card">
       <h2>Register Nomor Justifikasi Desain Baru</h2>
       <div class="preview-box">
-        <small>Pratinjau Format Nomor (WWW otomatis per proyek saat disimpan)</small>
-        <strong id="livePreview">WWW-JTF-1-YYYYYYYYYY-ZZ</strong>
+        <small>Pratinjau Format Nomor</small>
+        <strong id="livePreview">WWW-JTF-1-YYYYYYYYYY-ZZZZ</strong>
       </div>
 
       <div class="form-group">
@@ -444,7 +442,7 @@
       list.innerHTML = matches.map(p => `
         <div class="dropdown-item" onclick='selectProject(${JSON.stringify(p)})'>
           <strong>${p.nama}</strong>
-          <span>Finish Product: ${p.kode} • Tahun: ${p.tahunFull} (${p.tahun})</span>
+          <span>Finish Product: ${p.kode} • Tahun: ${p.tahun}</span>
         </div>
       `).join("");
     }
@@ -465,7 +463,7 @@
     function updatePreview() {
       const unit = document.getElementById("unitSelect").value;
       const kode = selectedProject ? selectedProject.kode : "YYYYYYYYYY";
-      const tahun = selectedProject ? selectedProject.tahun : "ZZ";
+      const tahun = selectedProject ? selectedProject.tahun : "ZZZZ";
       document.getElementById("livePreview").innerText = `WWW-JTF-${unit}-${kode}-${tahun}`;
     }
 
