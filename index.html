@@ -3,336 +3,784 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monitoring Justifikasi Desain Divisi Technology</title>
+  <title>Monitoring Justifikasi Desain — Divisi Technology</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f294a'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='white'>📄</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-page: #f4f6f9;
+      --bg-page: #f1f5f9;
       --bg-card: #ffffff;
-      --navy: #1e3a5f;
-      --navy-hover: #162c49;
-      --accent: #2b6cb0;
-      --accent-soft: #ebf4ff;
-      --text-main: #1e293b;
+      --navy-dark: #0f294a;
+      --navy-mid: #1e3a5f;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-soft: #eff6ff;
+      --text-main: #0f172a;
+      --text-secondary: #475569;
       --text-muted: #64748b;
       --border: #e2e8f0;
-      --shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+      --border-light: #f1f5f9;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.03);
+      --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+      --shadow-lg: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg-page);
       color: var(--text-main);
-      padding: 18px 24px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Full Page Container */
-    .container {
+    /* Top Hero Header */
+    .top-banner {
+      background: linear-gradient(125deg, #0b1f3a 0%, #163761 55%, #1e4b82 100%);
+      color: #ffffff;
+      padding: 24px 32px 68px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .top-banner::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(96, 165, 250, 0.16) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .banner-inner {
       width: 100%;
-      max-width: 100%;
-    }
-
-    /* Header Berisi */
-    .header {
-      background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
-      border: 1px solid var(--border);
-      border-top: 4px solid var(--navy);
-      border-radius: 14px;
-      padding: 18px 24px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       gap: 18px;
-      box-shadow: var(--shadow);
-      margin-bottom: 16px;
-    }
-    .header-left {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .header-tag {
-      display: inline-block;
-      width: fit-content;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-soft);
-      padding: 3px 10px;
-      border-radius: 999px;
-    }
-    .header h1 {
-      font-size: 1.32rem;
-      font-weight: 700;
-      color: var(--navy);
-      line-height: 1.25;
-    }
-    .header-sub {
-      font-size: 0.8rem;
-      color: var(--text-muted);
+      position: relative;
+      z-index: 2;
     }
 
-    /* Statistik Mini di Header */
-    .header-right {
+    .brand-block {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
     }
-    .stats-row {
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(6px);
+      flex-shrink: 0;
     }
-    .stat-pill {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      padding: 8px 14px;
-      min-width: 115px;
-      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
-    }
-    .stat-pill span {
-      display: block;
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-    .stat-pill strong {
-      font-size: 1.08rem;
       font-weight: 700;
-      color: var(--navy);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #93c5fd;
+      margin-bottom: 4px;
+    }
+    .brand-block h1 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+    .brand-block p {
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      margin-top: 3px;
     }
 
-    .header-actions {
+    .banner-actions {
       display: flex;
-      gap: 8px;
+      align-items: center;
+      gap: 10px;
     }
 
     .btn {
-      padding: 9px 16px;
-      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 10px 18px;
+      border-radius: 11px;
       border: 1px solid var(--border);
-      background: #fff;
+      background: #ffffff;
       color: var(--text-main);
       font-family: inherit;
-      font-size: 0.82rem;
+      font-size: 0.83rem;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.15s;
+      transition: all 0.18s ease;
       white-space: nowrap;
     }
-    .btn:hover { background: #f8fafc; }
-    .btn-primary { background: var(--navy); color: #fff; border-color: var(--navy); }
-    .btn-primary:hover { background: var(--navy-hover); }
-    .btn-sm { padding: 5px 10px; font-size: 0.75rem; border-radius: 8px; }
+    .btn:hover {
+      background: #f8fafc;
+      transform: translateY(-1px);
+    }
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      backdrop-filter: blur(6px);
+    }
+    .btn-glass:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .btn-cta {
+      background: #ffffff;
+      color: var(--navy-dark);
+      border-color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    }
+    .btn-cta:hover {
+      background: #f8fafc;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+    .btn-sm {
+      padding: 6px 11px;
+      font-size: 0.76rem;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .btn-sm:hover {
+      border-color: #cbd5e1;
+      background: #f1f5f9;
+    }
 
-    /* Filter Bar */
-    .filter-bar {
+    /* Main Content Wrapper */
+    .main-wrap {
+      width: 100%;
+      padding: 0 32px 36px 32px;
+      margin-top: -42px;
+      position: relative;
+      z-index: 3;
+    }
+
+    /* KPI Cards Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    @media (max-width: 960px) {
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 540px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+      .top-banner, .main-wrap { padding-left: 16px; padding-right: 16px; }
+    }
+
+    .kpi-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 13px 18px;
+      padding: 16px 20px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .kpi-info span {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .kpi-info strong {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+    .kpi-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .kpi-blue { background: #eff6ff; color: #2563eb; }
+    .kpi-indigo { background: #eef2ff; color: #4f46e5; }
+    .kpi-amber { background: #fffbeb; color: #d97706; }
+    .kpi-emerald { background: #ecfdf5; color: #059669; }
+
+    /* Table & Filter Container */
+    .panel-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .toolbar {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow);
+      gap: 12px;
+      background: #ffffff;
+    }
+    .toolbar-left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+    }
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 260px;
+      max-width: 460px;
+    }
+    .search-box svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      pointer-events: none;
     }
     .input-ctrl {
-      padding: 8px 12px;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      font-family: inherit;
-      font-size: 0.82rem;
-      outline: none;
-      background: #fff;
-    }
-    .input-ctrl:focus { border-color: var(--accent); }
-    .search-input { flex: 1; min-width: 240px; }
-
-    /* Table Full Width */
-    .table-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      box-shadow: var(--shadow);
-      overflow-x: auto;
       width: 100%;
+      padding: 9px 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.83rem;
+      color: var(--text-main);
+      outline: none;
+      background: #f8fafc;
+      transition: all 0.15s;
     }
-    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-    th {
-      background: var(--navy);
-      color: #fff;
+    .search-box .input-ctrl {
+      padding-left: 36px;
+    }
+    .input-ctrl:focus {
+      background: #ffffff;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    .select-ctrl {
+      width: auto;
+      min-width: 220px;
+      max-width: 340px;
+      cursor: pointer;
+    }
+    .result-counter {
+      font-size: 0.78rem;
       font-weight: 600;
-      text-align: left;
-      padding: 12px 14px;
+      color: var(--text-muted);
       white-space: nowrap;
     }
-    td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-    tr:hover td { background: #f8fafc; }
 
-    .col-no { width: 52px; text-align: center; }
-    .col-tgl { white-space: nowrap; min-width: 115px; }
-    .col-rev { white-space: nowrap; min-width: 105px; text-align: center; }
-    .col-link { white-space: nowrap; min-width: 110px; }
-    .col-aksi { white-space: nowrap; min-width: 155px; }
-
-    .doc-code {
-      font-family: 'Courier New', monospace;
+    /* Table */
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+    }
+    th {
+      background: #f8fafc;
+      color: var(--text-secondary);
+      font-size: 0.72rem;
       font-weight: 700;
-      font-size: 0.84rem;
-      color: var(--navy);
-      background: var(--accent-soft);
-      padding: 4px 9px;
-      border-radius: 6px;
-      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: left;
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    td {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: middle;
+      color: var(--text-main);
+    }
+    tbody tr {
+      transition: background 0.12s ease;
+    }
+    tbody tr:hover {
+      background: #f8fafc;
+    }
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .col-no { width: 56px; text-align: center; color: var(--text-muted); font-weight: 600; }
+    .col-tgl { white-space: nowrap; min-width: 118px; color: var(--text-secondary); font-weight: 500; }
+    .col-rev { white-space: nowrap; min-width: 112px; text-align: center; }
+    .col-link { white-space: nowrap; min-width: 120px; }
+    .col-aksi { white-space: nowrap; min-width: 165px; }
+
+    .proj-text {
+      font-weight: 600;
+      color: var(--text-main);
+      max-width: 260px;
+    }
+    .doc-title-text {
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    /* Nomor Dokumen Badge */
+    .doc-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: var(--navy-dark);
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      padding: 5px 10px;
+      border-radius: 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       cursor: pointer;
       white-space: nowrap;
+      transition: all 0.15s;
     }
+    .doc-code:hover {
+      background: var(--accent-soft);
+      border-color: #bfdbfe;
+      color: var(--accent);
+    }
+
+    /* Status Revisi Pill */
     .rev-badge {
-      background: #fef3c7;
-      color: #92400e;
+      background: #fffbeb;
+      color: #b45309;
       font-weight: 700;
       font-size: 0.75rem;
-      padding: 4px 12px;
+      padding: 4px 11px;
       border-radius: 999px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
+      gap: 6px;
       white-space: nowrap;
       border: 1px solid #fde68a;
+      transition: all 0.15s;
     }
-    .rev-badge.rev-zero { background: #e2e8f0; color: #334155; border-color: #cbd5e1; }
-    .link-vault { color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap; }
-    .link-vault:hover { text-decoration: underline; }
-    .actions { display: flex; gap: 6px; white-space: nowrap; }
+    .rev-badge:hover {
+      filter: brightness(0.96);
+    }
+    .rev-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #f59e0b;
+    }
+    .rev-badge.rev-zero {
+      background: #f1f5f9;
+      color: #475569;
+      border-color: #cbd5e1;
+    }
+    .rev-badge.rev-zero .rev-dot {
+      background: #64748b;
+    }
+
+    .pic-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .link-vault {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 4px 10px;
+      border-radius: 7px;
+      font-size: 0.77rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: 0.15s;
+    }
+    .link-vault:hover {
+      background: #dbeafe;
+    }
+    .no-link {
+      font-size: 0.77rem;
+      color: #94a3b8;
+      font-style: italic;
+    }
+
+    .actions {
+      display: flex;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--navy-dark);
+      color: #ffffff;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      z-index: 300;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: all 0.25s ease;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* Modal */
     .modal-bg {
-      display: none; position: fixed; inset: 0;
-      background: rgba(15, 23, 42, 0.48); backdrop-filter: blur(2px);
-      justify-content: center; align-items: center; z-index: 100; padding: 16px;
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(4px);
+      justify-content: center;
+      align-items: center;
+      z-index: 150;
+      padding: 16px;
     }
     .modal-card {
-      background: #fff; border-radius: 16px; padding: 24px;
-      width: 100%; max-width: 500px; box-shadow: 0 20px 40px rgba(0,0,0,0.18);
-      max-height: 90vh; overflow-y: auto;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 26px;
+      width: 100%;
+      max-width: 510px;
+      box-shadow: var(--shadow-lg);
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: modalPop 0.18s ease-out;
     }
-    .modal-card h2 { font-size: 1.05rem; color: var(--navy); margin-bottom: 14px; }
-    .form-group { margin-bottom: 12px; position: relative; }
-    .form-group label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; }
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.96) translateY(6px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .modal-header h2 {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+    }
+    .modal-close {
+      background: #f1f5f9;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .modal-close:hover {
+      background: #e2e8f0;
+      color: var(--text-main);
+    }
+
+    .form-group { margin-bottom: 13px; position: relative; }
+    .form-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+    }
     .form-group input, .form-group select {
-      width: 100%; padding: 9px 12px; border: 1px solid var(--border);
-      border-radius: 9px; font-family: inherit; font-size: 0.84rem;
+      width: 100%;
+      padding: 10px 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.84rem;
+      color: var(--text-main);
+      background: #ffffff;
+      outline: none;
+    }
+    .form-group input:focus, .form-group select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
     }
 
     /* Searchable Dropdown */
     .dropdown-list {
-      display: none; position: absolute; left: 0; right: 0; top: 100%;
-      background: #fff; border: 1px solid var(--border); border-radius: 10px;
-      max-height: 210px; overflow-y: auto; z-index: 120;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.12); margin-top: 4px;
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      max-height: 220px;
+      overflow-y: auto;
+      z-index: 160;
+      box-shadow: var(--shadow-lg);
+      margin-top: 4px;
     }
-    .dropdown-item { padding: 9px 12px; cursor: pointer; border-bottom: 1px solid #f1f5f9; }
+    .dropdown-item {
+      padding: 10px 13px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border-light);
+    }
     .dropdown-item:hover { background: var(--accent-soft); }
     .dropdown-item strong { display: block; font-size: 0.82rem; color: var(--text-main); }
     .dropdown-item span { font-size: 0.73rem; color: var(--text-muted); }
 
     /* Live Preview Box */
     .preview-box {
-      background: var(--accent-soft); border: 1px dashed var(--accent);
-      border-radius: 10px; padding: 12px; text-align: center; margin-bottom: 14px;
+      background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+      border: 1px dashed #93c5fd;
+      border-radius: 12px;
+      padding: 13px;
+      text-align: center;
+      margin-bottom: 16px;
     }
-    .preview-box small { display: block; font-size: 0.72rem; color: var(--text-muted); margin-bottom: 3px; }
-    .preview-box strong { font-family: 'Courier New', monospace; font-size: 1rem; color: var(--navy); }
+    .preview-box small {
+      display: block;
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .preview-box strong {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.02rem;
+      color: var(--navy-dark);
+    }
 
-    /* History List */
+    /* History Timeline */
     .hist-item {
-      border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px;
-      margin-bottom: 8px; display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 11px 14px;
+      margin-bottom: 9px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      background: #ffffff;
     }
-    .hist-item.latest { border-color: var(--accent); background: var(--accent-soft); }
+    .hist-item.latest {
+      border-color: #93c5fd;
+      background: var(--accent-soft);
+    }
 
-    .modal-footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
-    .status-msg { text-align: center; padding: 36px; color: var(--text-muted); font-size: 0.85rem; }
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+    }
+    .status-msg {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--text-muted);
+      font-size: 0.86rem;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <div class="header-left">
-        <span class="header-tag">Divisi Technology</span>
-        <h1>Monitoring Justifikasi Desain</h1>
-        <p class="header-sub">Registrasi Nomor & Pengendalian Dokumen</p>
-      </div>
 
-      <div class="header-right">
-        <div class="stats-row">
-          <div class="stat-pill">
-            <span>Total Dokumen</span>
-            <strong id="statTotalDoc">0</strong>
-          </div>
-          <div class="stat-pill">
-            <span>Proyek Aktif</span>
-            <strong id="statTotalProj">0</strong>
-          </div>
-          <div class="stat-pill">
-            <span>Dokumen Direvisi</span>
-            <strong id="statRevisedDoc">0</strong>
-          </div>
+  <!-- Top Banner -->
+  <header class="top-banner">
+    <div class="banner-inner">
+      <div class="brand-block">
+        <div class="brand-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
         </div>
-
-        <div class="header-actions">
-          <button class="btn" onclick="loadAllData()">🔄 Refresh</button>
-          <button class="btn btn-primary" onclick="openRegisterModal()">+ Register Nomor Baru</button>
+        <div>
+          <div class="brand-badge">Divisi Technology</div>
+          <h1>Monitoring Justifikasi Desain</h1>
+          <p>Registrasi Penomoran & Pengendalian Revisi Dokumen</p>
         </div>
       </div>
-    </div>
 
-    <!-- Filter -->
-    <div class="filter-bar">
-      <input type="text" id="searchInput" class="input-ctrl search-input" placeholder="Cari nomor dokumen, nama dokumen, proyek, atau PIC..." oninput="renderTable()" />
-      <select id="projectFilter" class="input-ctrl" onchange="renderTable()">
-        <option value="">Semua Proyek</option>
-      </select>
+      <div class="banner-actions">
+        <button class="btn btn-glass" onclick="loadAllData()">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          Refresh
+        </button>
+        <button class="btn btn-cta" onclick="openRegisterModal()">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+          </svg>
+          Register Nomor Baru
+        </button>
+      </div>
     </div>
+  </header>
 
-    <!-- Table -->
-    <div class="table-card">
-      <div id="loadingBox" class="status-msg">Memuat data dari Google Sheets...</div>
-      <table id="mainTable" style="display:none;">
-        <thead>
-          <tr>
-            <th class="col-no">No</th>
-            <th class="col-tgl">Tanggal</th>
-            <th>Proyek</th>
-            <th>Nomor Justifikasi Desain</th>
-            <th class="col-rev">Revisi</th>
-            <th>Nama Dokumen</th>
-            <th>PIC</th>
-            <th class="col-link">Link Vault</th>
-            <th class="col-aksi">Aksi</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-      </table>
-    </div>
-  </div>
+  <!-- Main Content -->
+  <main class="main-wrap">
+
+    <!-- KPI Cards -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-info">
+          <span>Total Dokumen</span>
+          <strong id="statTotalDoc">0</strong>
+        </div>
+        <div class="kpi-icon kpi-blue">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-info">
+          <span>Proyek Aktif</span>
+          <strong id="statTotalProj">0</strong>
+        </div>
+        <div class="kpi-icon kpi-indigo">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-info">
+          <span>Dokumen Direvisi</span>
+          <strong id="statRevisedDoc">0</strong>
+        </div>
+        <div class="kpi-icon kpi-amber">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-info">
+          <span>Tersimpan di Vault</span>
+          <strong id="statVaultDoc">0</strong>
+        </div>
+        <div class="kpi-icon kpi-emerald">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Table Panel -->
+    <section class="panel-card">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <div class="search-box">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <input type="text" id="searchInput" class="input-ctrl" placeholder="Cari nomor dokumen, nama dokumen, proyek, atau PIC..." oninput="renderTable()" />
+          </div>
+
+          <select id="projectFilter" class="input-ctrl select-ctrl" onchange="renderTable()">
+            <option value="">Semua Proyek</option>
+          </select>
+
+          <button id="btnResetFilter" class="btn btn-sm" style="display:none;" onclick="resetFilters()">✕ Reset Filter</button>
+        </div>
+
+        <div class="result-counter" id="resultCount">Menampilkan 0 dokumen</div>
+      </div>
+
+      <div class="table-scroll">
+        <div id="loadingBox" class="status-msg">Memuat data dari Google Sheets...</div>
+        <table id="mainTable" style="display:none;">
+          <thead>
+            <tr>
+              <th class="col-no">No</th>
+              <th class="col-tgl">Tanggal</th>
+              <th>Proyek</th>
+              <th>Nomor Justifikasi Desain</th>
+              <th class="col-rev">Revisi</th>
+              <th>Nama Dokumen</th>
+              <th>PIC</th>
+              <th class="col-link">Link Vault</th>
+              <th class="col-aksi">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toastBox" class="toast">Nomor berhasil disalin</div>
 
   <!-- Modal 1: Register Nomor Baru -->
   <div class="modal-bg" id="registerModal">
     <div class="modal-card">
-      <h2>Register Nomor Justifikasi Desain Baru</h2>
+      <div class="modal-header">
+        <h2>Register Nomor Justifikasi Desain Baru</h2>
+        <button class="modal-close" onclick="closeModal('registerModal')">✕</button>
+      </div>
+
       <div class="preview-box">
         <small>Pratinjau Format Nomor</small>
         <strong id="livePreview">WWW-JTF-1-YYYYYYYYYY-ZZZZ</strong>
@@ -384,7 +832,11 @@
   <!-- Modal 2: Update Revisi -->
   <div class="modal-bg" id="reviseModal">
     <div class="modal-card">
-      <h2>Update Revisi Dokumen</h2>
+      <div class="modal-header">
+        <h2>Update Revisi Dokumen</h2>
+        <button class="modal-close" onclick="closeModal('reviseModal')">✕</button>
+      </div>
+
       <div class="preview-box">
         <small>Nomor Dokumen Tetap • Naik ke <strong id="revNextLabel">Revisi A</strong></small>
         <strong id="revDocNumber">-</strong>
@@ -416,8 +868,11 @@
   <!-- Modal 3: Histori Revisi -->
   <div class="modal-bg" id="historyModal" onclick="if(event.target===this) closeModal('historyModal')">
     <div class="modal-card">
-      <h2>Riwayat Revisi Dokumen</h2>
-      <p id="histDocTitle" style="font-size:0.82rem; font-weight:700; color:var(--navy); margin-bottom:12px;"></p>
+      <div class="modal-header">
+        <h2>Riwayat Revisi Dokumen</h2>
+        <button class="modal-close" onclick="closeModal('historyModal')">✕</button>
+      </div>
+      <p id="histDocTitle" style="font-size:0.83rem; font-weight:700; color:var(--navy-dark); margin-bottom:14px;"></p>
       <div id="historyList"></div>
       <div class="modal-footer">
         <button class="btn btn-primary" onclick="closeModal('historyModal')">Tutup</button>
@@ -428,8 +883,11 @@
   <!-- Modal 4: Edit Link Vault -->
   <div class="modal-bg" id="linkModal">
     <div class="modal-card">
-      <h2>Update Link Vault</h2>
-      <p id="linkDocLabel" style="font-size:0.82rem; font-weight:700; color:var(--navy); margin-bottom:12px;"></p>
+      <div class="modal-header">
+        <h2>Update Link Vault</h2>
+        <button class="modal-close" onclick="closeModal('linkModal')">✕</button>
+      </div>
+      <p id="linkDocLabel" style="font-size:0.83rem; font-weight:700; color:var(--navy-dark); margin-bottom:14px;"></p>
       <input type="hidden" id="linkRow" />
       <div class="form-group">
         <label>URL / Link Vault</label>
@@ -452,13 +910,19 @@
       return new Date().toISOString().split("T")[0];
     }
 
+    function showToast(msg) {
+      const toast = document.getElementById("toastBox");
+      toast.innerText = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2400);
+    }
+
     // Format tanggal ke "01 Jan 2025"
     function formatTanggalPendek(raw) {
       if (!raw) return "-";
       const bulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
       const str = String(raw).trim();
 
-      // Jika format YYYY-MM-DD
       const isoMatch = str.match(/^(\d{4})-(\d{2})-(\d{2})/);
       if (isoMatch) {
         const y = isoMatch[1];
@@ -467,7 +931,6 @@
         if (bulan[m]) return `${d} ${bulan[m]} ${y}`;
       }
 
-      // Jika format Date string panjang dari Sheets (misal "Wed Jan 01 2025 ...")
       const parsed = new Date(str);
       if (!isNaN(parsed.getTime())) {
         const d = String(parsed.getDate()).padStart(2, "0");
@@ -490,12 +953,14 @@
         projectsData = data.projects || [];
         recordsData = data.records || [];
 
-        // Update Statistik Header
+        // Update Statistik KPI
         document.getElementById("statTotalDoc").innerText = recordsData.length;
         const uniqueProjects = new Set(recordsData.map(r => r.proyek).filter(Boolean));
         document.getElementById("statTotalProj").innerText = uniqueProjects.size;
         const revisedCount = recordsData.filter(r => r.revisi && r.revisi !== "0").length;
         document.getElementById("statRevisedDoc").innerText = revisedCount;
+        const vaultCount = recordsData.filter(r => r.link && r.link.trim() !== "").length;
+        document.getElementById("statVaultDoc").innerText = vaultCount;
 
         const filterSel = document.getElementById("projectFilter");
         const currentFilter = filterSel.value;
@@ -511,9 +976,17 @@
       }
     }
 
+    function resetFilters() {
+      document.getElementById("searchInput").value = "";
+      document.getElementById("projectFilter").value = "";
+      renderTable();
+    }
+
     function renderTable() {
       const kw = document.getElementById("searchInput").value.toLowerCase();
       const proj = document.getElementById("projectFilter").value;
+
+      document.getElementById("btnResetFilter").style.display = (kw || proj) ? "inline-flex" : "none";
 
       const filtered = recordsData.filter(r => {
         const matchProj = !proj || r.proyek === proj;
@@ -525,9 +998,11 @@
         return matchProj && matchKw;
       });
 
+      document.getElementById("resultCount").innerText = `Menampilkan ${filtered.length} dari ${recordsData.length} dokumen`;
+
       const tbody = document.getElementById("tableBody");
       if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:24px; color:#64748b;">Belum ada data dokumen yang cocok.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:36px; color:#64748b;">Tidak ada dokumen yang sesuai dengan pencarian.</td></tr>`;
         return;
       }
 
@@ -535,17 +1010,26 @@
         <tr>
           <td class="col-no">${idx + 1}</td>
           <td class="col-tgl">${formatTanggalPendek(r.tanggal)}</td>
-          <td>${r.proyek}</td>
-          <td><span class="doc-code" title="Klik untuk salin" onclick="copyText('${r.nomor}')">${r.nomor}</span></td>
+          <td class="proj-text">${r.proyek}</td>
+          <td>
+            <span class="doc-code" title="Klik untuk menyalin nomor" onclick="copyText('${r.nomor}')">
+              ${r.nomor}
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+              </svg>
+            </span>
+          </td>
           <td class="col-rev">
-            <span class="rev-badge ${r.revisi === '0' ? 'rev-zero' : ''}" onclick='openHistoryModal(${JSON.stringify(r)})'>
+            <span class="rev-badge ${r.revisi === '0' ? 'rev-zero' : ''}" title="Klik untuk melihat riwayat revisi" onclick='openHistoryModal(${JSON.stringify(r)})'>
+              <span class="rev-dot"></span>
               Rev ${r.revisi} ▾
             </span>
           </td>
-          <td><strong>${r.judul}</strong></td>
-          <td>${r.pic}</td>
+          <td class="doc-title-text">${r.judul}</td>
+          <td><span class="pic-chip">${r.pic}</span></td>
           <td class="col-link">
-            ${r.link ? `<a href="${r.link}" target="_blank" class="link-vault">Buka File ↗</a>` : `<span style="color:#94a3b8;">Belum ada</span>`}
+            ${r.link ? `<a href="${r.link}" target="_blank" class="link-vault">Buka File ↗</a>` : `<span class="no-link">Belum tersedia</span>`}
           </td>
           <td class="col-aksi">
             <div class="actions">
@@ -644,7 +1128,7 @@
         const json = await res.json();
         if (json.status !== "success") throw new Error(json.message);
 
-        alert(json.message);
+        showToast(json.message);
         closeModal("registerModal");
         loadAllData();
       } catch (err) {
@@ -692,7 +1176,7 @@
         const json = await res.json();
         if (json.status !== "success") throw new Error(json.message);
 
-        alert(json.message);
+        showToast(json.message);
         closeModal("reviseModal");
         loadAllData();
       } catch (err) {
@@ -705,15 +1189,15 @@
 
     /* Histori Revisi */
     function openHistoryModal(r) {
-      document.getElementById("histDocTitle").innerText = r.nomor + " (" + r.proyek + ")";
+      document.getElementById("histDocTitle").innerText = r.nomor + " • " + r.proyek;
       const list = r.history || [];
       document.getElementById("historyList").innerHTML = list.map((h, i) => `
         <div class="hist-item ${i === list.length - 1 ? 'latest' : ''}">
           <div>
-            <strong style="font-size:0.82rem;">Revisi ${h.revisi}</strong>
-            <div style="font-size:0.8rem; margin-top:2px;">${h.judul}</div>
+            <strong style="font-size:0.83rem; color:#0f294a;">Revisi ${h.revisi}</strong>
+            <div style="font-size:0.82rem; margin-top:3px; color:#334155;">${h.judul}</div>
           </div>
-          <span style="font-size:0.75rem; color:#64748b; white-space:nowrap;">${formatTanggalPendek(h.tanggal)}</span>
+          <span style="font-size:0.75rem; font-weight:600; color:#64748b; white-space:nowrap;">${formatTanggalPendek(h.tanggal)}</span>
         </div>
       `).join("");
       document.getElementById("historyModal").style.display = "flex";
@@ -743,6 +1227,7 @@
         const json = await res.json();
         if (json.status !== "success") throw new Error(json.message);
 
+        showToast("Link Vault berhasil diperbarui");
         closeModal("linkModal");
         loadAllData();
       } catch (err) {
@@ -755,7 +1240,7 @@
 
     function copyText(txt) {
       navigator.clipboard.writeText(txt);
-      alert("Nomor disalin: " + txt);
+      showToast("Nomor disalin: " + txt);
     }
 
     function closeModal(id) {
